@@ -1,8 +1,8 @@
 #include "main.h"
 #include "lsl_init_regs.h"
 #include "lsl_utils.h"
+#include "lsl_io.h"
 #include "lsl_display.h"
-#include "lsl_pinouts.h"
 
 int main(void) {
 
@@ -18,12 +18,12 @@ int main(void) {
 	while (1) {
 
 		// Button		
-		if (!LSL_PINOUTS_Read(&Button)) {			// If Button pressed
+		if (!LSL_DIGITAL_Read(&Button)) {			// If Button pressed
 			LSL_UTILS_DelayMs(100); 				// Anti bouncing
-			LSL_PINOUTS_Write(&LED, HIGH);			// LED ON
+			LSL_DIGITAL_Write(&LED, HIGH);			// LED ON
 			sw_cpt++;								// Switch counter ++
 		} else {									// If Button not pressed / released
-			LSL_PINOUTS_Write(&LED, LOW);			// LED OFF
+			LSL_DIGITAL_Write(&LED, LOW);			// LED OFF
 			sw_cpt = 0;								// Reset switch counter
 		}
 
