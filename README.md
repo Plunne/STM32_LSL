@@ -4,7 +4,7 @@ Low Level STM32 Abstraction Library with many optionnal features.
 
 # INSTRUCTIONS
 
-Before programming you should setup your board by copying its files into the project root.
+Before programming you shall setup your board by copying its files into the project root.
 
 **Exemple :**
 
