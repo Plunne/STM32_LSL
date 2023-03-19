@@ -26,17 +26,17 @@ void LSL_DISPLAY_Display7Seg(LSL_Pinout *diode, unsigned char number, enum Diode
 
 }
 
-void LSL_DISPLAY_Display7SegAnodeCathode(LSL_Pinout *diode, unsigned char number, enum PINOUT_STATE stateA, enum PINOUT_STATE stateB) {
+void LSL_DISPLAY_Display7SegAnodeCathode(LSL_Pinout *diode, unsigned char number, enum DIGITAL_STATE stateA, enum DIGITAL_STATE stateB) {
 
     unsigned char segment = LSL_DISPLAY_Get7Seg(number); // Translate number to bits pattern
 
     for (int i=0; i < DIODE_NB; i++) { // For each diode
 
-        LSL_PINOUTS_Write(&diode[i], stateA);       // LED i OFF
+        LSL_DIGITAL_Write(&diode[i], stateA);       // LED i OFF
         if (segment & (1 << i)) {                   // Check if at bit i, Pattern bit is HIGH
-            LSL_PINOUTS_Write(&diode[i], stateB);   // If pattern bit is HIGH, LED i ON
+            LSL_DIGITAL_Write(&diode[i], stateB);   // If pattern bit is HIGH, LED i ON
         } else {                                    // Else pattern dosen't match HIGH for LED
-            LSL_PINOUTS_Write(&diode[i], stateA);   // LED i OFF
+            LSL_DIGITAL_Write(&diode[i], stateA);   // LED i OFF
         }
     }
 }
