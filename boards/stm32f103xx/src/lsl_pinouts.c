@@ -28,7 +28,5 @@ void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode) {
 }
 
 void LSL_PINOUTS_InitPinout(LSL_Pinout *pinout) {
-    for (uint8_t i=0; i < (sizeof(*pinout)/sizeof(pinout[0])); i++) { // For each Pinout from the array
-        LSL_PINOUTS_SetPinout(pinout[i].PORTx, pinout[i].pin, pinout[i].mode); // Set GPIO RCC & Mode
-    }
+    LSL_PINOUTS_SetPinout(pinout->PORTx, pinout->pin, pinout->mode); // Set GPIO RCC & Mode
 }

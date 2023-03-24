@@ -15,7 +15,7 @@ void LSL_Init_RCC(void) {
 
 void LSL_Init_GPIO(void) {
     
-	LSL_PINOUTS_InitPinout(&LED);
-	LSL_PINOUTS_InitPinout(&POTAR);
+	LSL_IO_InitGPIO(&LED);
+	LSL_IO_InitGPIO(&POTAR);
 
 }
