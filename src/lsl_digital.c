@@ -1,7 +1,7 @@
 #include "lsl_digital.h"
 
 /* Input */
-unsigned char LSL_DIGITAL_Read(LSL_Pinout *pinout) {
+uint8_t LSL_DIGITAL_Read(LSL_Pinout *pinout) {
     return (pinout->PORTx->IDR & (1 << pinout->pin));   // Read a digital input
 }
 

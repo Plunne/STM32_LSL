@@ -10,25 +10,25 @@ void LSL_PINOUTS_Enable(GPIO_TypeDef *PORTx) {
 }
 
 /* Mode */
-void LSL_PINOUTS_SetMode(GPIO_TypeDef *PORTx, unsigned char pin, unsigned char mode) {
+void LSL_PINOUTS_SetMode(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode) {
     if (pin < 8) PORTx->CRL |= (mode << (pin * 4)); // Set Mode for pins 0 -> 7
     else PORTx->CRH |= (mode << ((pin * 4) - 32));  // Set Mode for pins 8 -> 15
 }
 
-void LSL_PINOUTS_ClearMode(GPIO_TypeDef *PORTx, unsigned char pin) {
+void LSL_PINOUTS_ClearMode(GPIO_TypeDef *PORTx, uint8_t pin) {
     if (pin < 8) PORTx->CRL &= ~(0xF << (pin * 4)); // Reset Mode for pins 0 -> 7
     else PORTx->CRH &= ~(0xF << ((pin * 4) - 32));  // Reset Mode for pins 8 -> 15
 }
 
 /* Pinout */
-void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, unsigned char pin, unsigned char mode) {
+void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode) {
     LSL_PINOUTS_Enable(PORTx);                      // Enable GPIO RCC
     LSL_PINOUTS_ClearMode(PORTx, pin);              // Reset GPIO Mode
     LSL_PINOUTS_SetMode(PORTx, pin, mode);          // Set GPIO Mode
 }
 
 void LSL_PINOUTS_InitPinout(LSL_Pinout *pinout) {
-    for (unsigned int i=0; i < sizeof(*pinout); i++) { // For each Pinout from the array
+    for (uint8_t i=0; i < (sizeof(*pinout)/sizeof(pinout[0])); i++) { // For each Pinout from the array
         LSL_PINOUTS_SetPinout(pinout[i].PORTx, pinout[i].pin, pinout[i].mode); // Set GPIO RCC & Mode
     }
 }

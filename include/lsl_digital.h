@@ -6,7 +6,7 @@
 enum DIGITAL_STATE {LOW, HIGH, TOGGLE};
 
 /* Input */
-unsigned char LSL_DIGITAL_Read(LSL_Pinout *pinout);
+uint8_t LSL_DIGITAL_Read(LSL_Pinout *pinout);
 
 /* Output */
 void LSL_DIGITAL_Write(LSL_Pinout *pinout, enum DIGITAL_STATE mode);

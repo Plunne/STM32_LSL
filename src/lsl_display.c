@@ -1,7 +1,7 @@
 #include "lsl_display.h"
 
 /* 7 Segments */
-unsigned char LSL_DISPLAY_Get7Seg(unsigned char number) {
+uint8_t LSL_DISPLAY_Get7Seg(uint8_t number) {
 
     switch(number)
     {
@@ -19,16 +19,16 @@ unsigned char LSL_DISPLAY_Get7Seg(unsigned char number) {
     }
 }
 
-void LSL_DISPLAY_Display7Seg(LSL_Pinout *diode, unsigned char number, enum DiodeCOM common) {
+void LSL_DISPLAY_Display7Seg(LSL_Pinout *diode, uint8_t number, enum DiodeCOM common) {
 
     if (common == anode) LSL_DISPLAY_Display7SegAnodeCathode(diode, number, HIGH, LOW);         // If display has Common Anode
     else if (common == cathode) LSL_DISPLAY_Display7SegAnodeCathode(diode, number, LOW, HIGH);  // If display has Common Cathode
 
 }
 
-void LSL_DISPLAY_Display7SegAnodeCathode(LSL_Pinout *diode, unsigned char number, enum DIGITAL_STATE stateA, enum DIGITAL_STATE stateB) {
+void LSL_DISPLAY_Display7SegAnodeCathode(LSL_Pinout *diode, uint8_t number, enum DIGITAL_STATE stateA, enum DIGITAL_STATE stateB) {
 
-    unsigned char segment = LSL_DISPLAY_Get7Seg(number); // Translate number to bits pattern
+    uint8_t segment = LSL_DISPLAY_Get7Seg(number); // Translate number to bits pattern
 
     for (int i=0; i < DIODE_NB; i++) { // For each diode
 
