@@ -1,6 +1,6 @@
 # STM32_LSL
 
-Low Level STM32 Abstraction Library with many optionnal features.
+Low Level STM32 Drivers with many optionnal features.
 
 # INSTRUCTIONS
 
@@ -29,5 +29,8 @@ All STM32 F767 that depends of the `stm32f767xx.h` header.
 - [x] Delay (ms)
 - [x] Digital R/W
 - [x] 7 segment display (Anode/Cathode modes)
-- [ ] Analog R/W
-- [ ] UART Tx/Rx
+- [x] Analog ADC
+- [ ] Analog DAC/PWM
+- [-] Timers
+- [-] USART Tx/Rx
+- [x] Clock HSI/PLL/etc.

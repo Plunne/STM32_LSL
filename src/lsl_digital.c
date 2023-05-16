@@ -1,13 +1,14 @@
 #include "lsl_digital.h"
 
 /* Input */
-uint8_t LSL_DIGITAL_Read(LSL_Pinout *pinout) {
-    return (pinout->PORTx->IDR & (1 << pinout->pin));   // Read a digital input
+uint8_t LSL_DIGITAL_Read(LSL_Pinout_t *pinout)
+{    
+    return (pinout->PORTx->IDR & (1 << pinout->pin)) ? 1 : 0;   // Read a digital input
 }
 
 /* Output */
-void LSL_DIGITAL_Write(LSL_Pinout *pinout, enum DIGITAL_STATE mode) {
-    
+void LSL_DIGITAL_Write(LSL_Pinout_t *pinout, LSL_DIGITAL_State_t mode)
+{    
     switch (mode)
     {
     case LOW:
@@ -25,14 +26,17 @@ void LSL_DIGITAL_Write(LSL_Pinout *pinout, enum DIGITAL_STATE mode) {
     }
 }
 
-void LSL_DIGITAL_Set(LSL_Pinout *pinout) {
+void LSL_DIGITAL_Set(LSL_Pinout_t *pinout)
+{
     pinout->PORTx->ODR |= (1 << pinout->pin);   // Set pinout HIGH
 }
 
-void LSL_DIGITAL_Clear(LSL_Pinout *pinout) {
+void LSL_DIGITAL_Clear(LSL_Pinout_t *pinout)
+{
     pinout->PORTx->ODR &= ~(1 << pinout->pin);  // Clear pinout LOW
 }
 
-void LSL_DIGITAL_Toggle(LSL_Pinout *pinout) {
+void LSL_DIGITAL_Toggle(LSL_Pinout_t *pinout)
+{
     pinout->PORTx->ODR ^= (1 << pinout->pin);   // Toggle pinout (Swap HIGH/LOW)
 }
