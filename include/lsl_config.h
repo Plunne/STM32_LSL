@@ -5,11 +5,14 @@
 #include "lsl_utils.h"
 
 /* Abstraction Layer Includes */
+#include "lsl_adc.h"
 #include "lsl_digital.h"
 
 /* Libraries Level Includes */
 
 /* Analog */
+LSL_Pinout_t POTAR;
+LSL_Pinout_t POTAR2;
 
 /* Digital */
 LSL_Pinout_t LED;                 // LED

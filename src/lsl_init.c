@@ -24,14 +24,14 @@ void LSL_Init_GPIO(void)
 
 void LSL_Init_ADC(void)
 {
-	// /* ADC Handler */
-    // LSL_INIT_ADC1.adc              = ADC1;
-    // LSL_INIT_ADC1.nbChannels       = 2;
-    // LSL_INIT_ADC1.adc_pinout[0]    = &POTAR;
-    // LSL_INIT_ADC1.adc_pinout[1]    = &POTAR2;
+	/* ADC Handler */
+    LSL_INIT_ADC1.adc              = ADC1;
+    LSL_INIT_ADC1.nbChannels       = 2;
+    LSL_INIT_ADC1.adc_pinout[0]    = &POTAR;
+    LSL_INIT_ADC1.adc_pinout[1]    = &POTAR2;
 
-	// /* ADC Init */
-	// LSL_ADC_Init(&LSL_INIT_ADC1);
+	/* ADC Init */
+	LSL_ADC_Init(&LSL_INIT_ADC1);
 }
 
 void LSL_Init_USART(void)

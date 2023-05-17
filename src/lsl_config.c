@@ -7,6 +7,10 @@ void LSL_CONFIG_Init(void)
      *     ADC     *
      ***************/
 
+    // POTAR
+    LSL_CONFIG_Pinout(&POTAR, GPIOA, 5, ADC_MODE);
+    LSL_CONFIG_Pinout(&POTAR2, GPIOA, 6, ADC_MODE);
+
     /*******************
      *     DIGITAL     *
      *******************/

@@ -1,7 +1,6 @@
 // #include "lsl_init.h"
-#include "lsl_digital.h"
 #include "lsl_utils.h"
-#include "lsl_config.h"
+#include "lsl_init.h"
 
 /* Globals */
 // static int counter = 0;
@@ -23,7 +22,12 @@ int main(void)
 	/* Super Loop */
 	while (1)
 	{
-		LSL_DIGITAL_Write(&LED, LSL_DIGITAL_Read(&Button));
+		// LSL_DIGITAL_Write(&LED, LSL_DIGITAL_Read(&Button));
+
+		LSL_DIGITAL_Write(&LED, HIGH);
+		LSL_UTILS_DelayMs(LSL_ADC_Read(&LSL_INIT_ADC1, &POTAR));
+		LSL_DIGITAL_Write(&LED, LOW);
+		LSL_UTILS_DelayMs(LSL_ADC_Read(&LSL_INIT_ADC1, &POTAR2));
 	}
 	
 	return 0;
