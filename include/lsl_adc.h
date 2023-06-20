@@ -16,7 +16,6 @@ typedef struct {
 
 /* Init */
 void LSL_ADC_Init(LSL_ADC_Handler_t* ADC_Handler);
-void LSL_ADC_InitSingle(LSL_ADC_Handler_t* ADC_Handler);
 
 /* Setup */
 void LSL_ADC_Setup(ADC_TypeDef* adc);
@@ -32,16 +31,15 @@ void LSL_ADC_SetConvNumber(ADC_TypeDef* adc, uint8_t nbConv);
 void LSL_ADC_SingleSequence(ADC_TypeDef* adc, uint8_t sequence, uint8_t channel);
 void LSL_ADC_MultipleSequences(LSL_ADC_Handler_t* ADC_Handler);
 
-/* Calibration */
-void LSL_ADC_Calibrate(ADC_TypeDef* adc);
-
 /* Enable */
 void LSL_ADC_Enable(ADC_TypeDef* adc);
 
+/* Start */
+void LSL_ADC_Start(ADC_TypeDef* adc);
+
 /* Read */
 uint16_t LSL_ADC_Read(LSL_ADC_Handler_t* ADC_Handler, LSL_Pinout_t* pinout);
-uint16_t LSL_ADC_ReadSingle(LSL_ADC_Handler_t* ADC_Handler);
-uint16_t LSL_ADC_ReadSingleMax(LSL_ADC_Handler_t* ADC_Handler, uint8_t max);
-uint16_t LSL_ADC_ReadSingleRange(LSL_ADC_Handler_t* ADC_Handler, uint16_t min, uint16_t max);
+uint16_t LSL_ADC_ReadMax(LSL_ADC_Handler_t* ADC_Handler, LSL_Pinout_t* pinout, uint8_t max);
+uint16_t LSL_ADC_ReadRange(LSL_ADC_Handler_t* ADC_Handler, LSL_Pinout_t* pinout, uint16_t min, uint16_t max);
 
 #endif // LSL_ADC_H

@@ -9,16 +9,7 @@ void LSL_ADC_Init(LSL_ADC_Handler_t* ADC_Handler)
 	LSL_ADC_MultipleSequences(ADC_Handler);
 	LSL_ADC_Enable(ADC_Handler->adc);
 	LSL_ADC_SetupDMA(ADC_Handler->adc, ADC_Handler->nbChannels, (uint32_t*) &ADC_Handler->adc_channel);
-}
-
-void LSL_ADC_InitSingle(LSL_ADC_Handler_t* ADC_Handler)
-{
-	LSL_ADC_Setup(ADC_Handler->adc);
-	LSL_ADC_SetResolution(ADC_Handler->adc, ADC_Handler->resolution);
-	LSL_ADC_SetConvNumber(ADC_Handler->adc, ADC_Handler->nbChannels);
-	LSL_ADC_SingleSequence(ADC_Handler->adc, 1, ADC_Handler->adc_pinout[0]->pin);
-	LSL_ADC_Enable(ADC_Handler->adc);
-	LSL_ADC_Calibrate(ADC_Handler->adc);
+	LSL_ADC_Start(ADC_Handler->adc);
 }
 
 /* Setup */
@@ -40,8 +31,6 @@ void LSL_ADC_Setup(ADC_TypeDef* adc)
 
 	// Set ADC Frequency (max allowed 16Mhz)
 	ADC->CCR |= (0b10 << ADC_CCR_ADCPRE_Pos);
-
-	// Set resolution here?
 
 	// Enable scan mode
 	adc->CR1 |= ADC_CR1_SCAN;
@@ -95,12 +84,7 @@ void LSL_ADC_SetupDMA(ADC_TypeDef* adc, uint16_t data_size, uint32_t* data)
 	dma->M0AR = (uint32_t) data;		// Data address to DMA Data Register
 
 	// Start DMA
-	dma->CR |= DMA_SxCR_EN; // Start DMA
-
-	// External Trigger for ADC
-	//adc->CR2 |= (0b111 << ADC_CR2_EXTSEL_Pos);	// Set SWSTART control
-	//adc->CR2 |= (0b01 << ADC_CR2_EXTEN_Pos);	// Let DMA running ADC conversions
-	//adc->CR2 |= ADC_CR2_SWSTART;  				// Start regular conversion by software
+	dma->CR |= DMA_SxCR_EN;
 }
 
 /* Resolution */
@@ -179,17 +163,17 @@ void LSL_ADC_MultipleSequences(LSL_ADC_Handler_t* ADC_Handler)
 	}
 }
 
-/* Calibration */
-void LSL_ADC_Calibrate(ADC_TypeDef* adc)
-{
-	//adc->CR2 |= ADC_CR2_CAL; 		// Calibrate ADC
-	//while(adc->CR2 & ADC_CR2_CAL) {} 	// Waiting for calibration
-}
-
 /* Enable */
 void LSL_ADC_Enable(ADC_TypeDef* adc)
 {
 	adc->CR2 |= ADC_CR2_ADON; // Run ADC (ADON)
+}
+
+/* Start */
+void LSL_ADC_Start(ADC_TypeDef* adc)
+{
+	// Start ADC
+	adc->CR2 |= ADC_CR2_SWSTART;
 }
 
 /* Read */
@@ -205,35 +189,23 @@ uint16_t LSL_ADC_Read(LSL_ADC_Handler_t* ADC_Handler, LSL_Pinout_t* pinout)
 	return 0;
 }
 
-uint16_t LSL_ADC_ReadSingle(LSL_ADC_Handler_t* ADC_Handler)
-{
-		// ADC1 Capture
-		ADC_Handler->adc->CR2 |= ADC_CR2_ADON;			// Launch ADC capture
-		while (!(ADC_Handler->adc->SR & ADC_SR_EOC)) {}	// Waiting for capture
-		ADC_Handler->adc->SR &= ~ADC_SR_EOC;			// Reset end of conversion flag
-
-		// ADC1 Data
-		return (uint16_t)(ADC_Handler->adc->DR & ~(0xF << 12)); // Get ADC Data without MSB Bits 12 -> 15 (because it's a 12bits ADC not 16)
-}
-
-uint16_t LSL_ADC_ReadSingleMax(LSL_ADC_Handler_t* ADC_Handler, uint8_t max) {
+uint16_t LSL_ADC_ReadMax(LSL_ADC_Handler_t* ADC_Handler, LSL_Pinout_t* pinout, uint8_t max) {
 
 	if (max)
 	{
-		return (LSL_ADC_ReadSingle(ADC_Handler) / (4092 / max));
+		return (LSL_ADC_Read(ADC_Handler, pinout) / (4092 / max));
 	}
 
 	return 0;
 }
 
-
-uint16_t LSL_ADC_ReadSingleRange(LSL_ADC_Handler_t* ADC_Handler, uint16_t min, uint16_t max) {
+uint16_t LSL_ADC_ReadRange(LSL_ADC_Handler_t* ADC_Handler, LSL_Pinout_t* pinout, uint16_t min, uint16_t max) {
 
 	if (max)
 	{
 		if((min < 0xffe) && (max < 0xfff))
 		{
-			return (min + (LSL_ADC_ReadSingle(ADC_Handler) / (4092 / (max - min))));
+			return (min + (LSL_ADC_Read(ADC_Handler, pinout) / (4092 / (max - min))));
 		}
 	}
 
