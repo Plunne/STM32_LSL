@@ -3,17 +3,18 @@
 /* Enable */
 void LSL_PINOUTS_Enable(GPIO_TypeDef *PORTx)
 {
-    if (PORTx == GPIOA) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; // Enable RCC for GPIOA
-    else if (PORTx == GPIOB) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN; // Enable RCC for GPIOB
-    else if (PORTx == GPIOC) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN; // Enable RCC for GPIOC
-    else if (PORTx == GPIOD) RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN; // Enable RCC for GPIOD
-    else if (PORTx == GPIOE) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; // Enable RCC for GPIOE
-    else if (PORTx == GPIOF) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOFEN; // Enable RCC for GPIOF
-    else if (PORTx == GPIOG) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOGEN; // Enable RCC for GPIOG
-    else if (PORTx == GPIOH) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOHEN; // Enable RCC for GPIOH
-    else if (PORTx == GPIOI) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOIEN; // Enable RCC for GPIOI
-    else if (PORTx == GPIOJ) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOJEN; // Enable RCC for GPIOJ
-    else if (PORTx == GPIOK) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOKEN; // Enable RCC for GPIOK
+    if (PORTx == GPIOA) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; } // Enable RCC for GPIOA
+    else if (PORTx == GPIOB) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN; } // Enable RCC for GPIOB
+    else if (PORTx == GPIOC) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN; } // Enable RCC for GPIOC
+    else if (PORTx == GPIOD) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN; } // Enable RCC for GPIOD
+    else if (PORTx == GPIOE) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; } // Enable RCC for GPIOE
+    else if (PORTx == GPIOF) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOFEN; } // Enable RCC for GPIOF
+    else if (PORTx == GPIOG) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOGEN; } // Enable RCC for GPIOG
+    else if (PORTx == GPIOH) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOHEN; } // Enable RCC for GPIOH
+    else if (PORTx == GPIOI) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOIEN; } // Enable RCC for GPIOI
+    else if (PORTx == GPIOJ) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOJEN; } // Enable RCC for GPIOJ
+    else if (PORTx == GPIOK) { RCC->AHB1ENR |= RCC_AHB1ENR_GPIOKEN; } // Enable RCC for GPIOK
+    else {}
 }
 
 /* Mode */

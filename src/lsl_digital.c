@@ -11,18 +11,18 @@ void LSL_DIGITAL_Write(LSL_Pinout_t *pinout, LSL_DIGITAL_State_t mode)
 {    
     switch (mode)
     {
-    case LOW:
-        LSL_DIGITAL_Clear(pinout);
-        break;
-    case HIGH:
-        LSL_DIGITAL_Set(pinout);
-        break;
-    case TOGGLE:
-        LSL_DIGITAL_Toggle(pinout);
-        break;
-    
-    default:
-        break;
+        case LOW:
+            LSL_DIGITAL_Clear(pinout);
+            break;
+        case HIGH:
+            LSL_DIGITAL_Set(pinout);
+            break;
+        case TOGGLE:
+            LSL_DIGITAL_Toggle(pinout);
+            break;
+        
+        default:
+            break;
     }
 }
 
