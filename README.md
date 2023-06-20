@@ -11,4 +11,4 @@ Low Level STM32 Drivers with many optionnal features.
 - [ ] Analog DAC/PWM
 - [ ] Timers
 - [ ] USART Tx/Rx
-- [x] Clock HSI/PLL/etc.
+- [ ] Clock HSI/PLL/etc.
