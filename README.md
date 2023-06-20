@@ -16,18 +16,19 @@ cp -r boards/stm32f103xx .
 
 # SUPPORTED BOARDS
 
-## stm32f103xx
+## [stm32f103xx](https://github.com/Plunne/STM32_LSL/tree/f1)
 
 All STM32 F103 that depends of the `stm32f103xb.h` header.
 
-## stm32f767xx
+## [stm32f767xx](https://github.com/Plunne/STM32_LSL/tree/f7)
 
 All STM32 F767 that depends of the `stm32f767xx.h` header.
 
 # FUNCTIONNALITIES
 
-- [x] Delay (ms)
-- [x] Digital R/W
-- [x] 7 segment display (Anode/Cathode modes)
-- [ ] Analog R/W
-- [ ] UART Tx/Rx
+- Delay (ms)
+- Digital R/W
+- 7 segment display (Anode/Cathode modes)
+- Analog R/W
+- UART Tx/Rx
+- Timers
