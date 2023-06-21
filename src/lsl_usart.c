@@ -1,6 +1,5 @@
 #include "lsl_usart.h"
 
-
 /* Init */
 void LSL_USART_Init(LSL_USART_Handler_t* USART_Handler)
 {
@@ -244,5 +243,5 @@ uint8_t LSL_USART_Rx(LSL_USART_Handler_t* USART_Handler)
 /* Wait for interrupt */
 void LSL_USART_Rxi(LSL_USART_Handler_t* USART_Handler)
 {
-	USART_Handler->usart->ISR &= ~USART_ISR_RXNE;
+	USART_Handler->usart->RQR |= USART_RQR_RXFRQ;
 }
