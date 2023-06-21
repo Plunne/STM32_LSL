@@ -16,7 +16,7 @@ void LSL_Init_TIMERS(void);
 /* Analog Handler */
 LSL_ADC_Handler_t LSL_INIT_ADC1;
 /* USART Handler */
-// LSL_USART_Handler LSL_INIT_USART2;
+// LSL_USART_Handler_t LSL_INIT_USART2;
 
 /* Timer Handler */
 // LSL_TIMER_Handler LSL_INIT_TIMER2;
