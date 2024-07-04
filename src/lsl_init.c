@@ -11,7 +11,7 @@ void LSL_Init_RCC(void)
 {
 	/* RCC Setup */
 	LSL_CLOCK_EnableHSI();									// Enable High Speed Internal clock
-	LSL_CLOCK_InitPLL(PLL_M_DIV2, PLL_N_x54, PLL_P_DIV2);	// PLL = 216MHz
+	LSL_CLOCK_InitPLL(PLL_M_DIV8, PLL_N_x216, PLL_P_DIV2);	// PLL = 216MHz
 }
 
 void LSL_Init_GPIO(void)
@@ -43,7 +43,7 @@ void LSL_Init_USART(void)
 	LSL_INIT_USART.parity 		= 0;
 	LSL_INIT_USART.stop 		= 1;
 	LSL_INIT_USART.direction 	= Tx_Rx;
-	LSL_INIT_USART.event 		= USART3_IRQn;
+	LSL_INIT_USART.event 		= 0;//USART3_IRQn;
 
 	/* USART Init */
 	LSL_USART_Init(&LSL_INIT_USART);

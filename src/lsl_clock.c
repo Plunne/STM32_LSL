@@ -14,21 +14,21 @@ void LSL_CLOCK_EnablePLL(void)
 }
 
 /* PLL Config */
-void LSL_CLOCK_InitPLL(uint8_t dividerM, uint8_t multiplierN, uint8_t dividerP)
+void LSL_CLOCK_InitPLL(uint8_t in_dividerM, uint8_t in_multiplierN, uint8_t in_dividerP)
 {
-    LSL_CLOCK_PrescalePLL(dividerM);	    // Setup PLL Prescaler
-    LSL_CLOCK_UpscalePLL(multiplierN);	    // Setup PLL Multiplier
-    LSL_CLOCK_PostscalePLL(dividerP);	    // Setup PLL Postscaler
+    LSL_CLOCK_PrescalePLL(in_dividerM);	    // Setup PLL Prescaler
+    LSL_CLOCK_UpscalePLL(in_multiplierN);	    // Setup PLL Multiplier
+    LSL_CLOCK_PostscalePLL(in_dividerP);	    // Setup PLL Postscaler
     LSL_CLOCK_EnablePLL();					// Enable PLL
     LSL_CLOCK_Select(RCC_CFGR_SW_PLL);		// Select PLL Clock
 }
 
-void LSL_CLOCK_PrescalePLL(uint8_t divider)
+void LSL_CLOCK_PrescalePLL(uint8_t in_divider)
 {
-    if ( (divider >= PLL_M_DIV_MIN) && (divider <= PLL_M_DIV_MAX) )
+    if ( (in_divider >= PLL_M_DIV_MIN) && (in_divider <= PLL_M_DIV_MAX) )
     {
         RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLM_Msk;			        // Clear PLL M Prsc Divider register
-        RCC->PLLCFGR |= (divider << RCC_PLLCFGR_PLLM_Pos);	    // Set PLL M Prsc Divider factor
+        RCC->PLLCFGR |= (in_divider << RCC_PLLCFGR_PLLM_Pos);	    // Set PLL M Prsc Divider factor
     }
     else
     {
@@ -36,32 +36,32 @@ void LSL_CLOCK_PrescalePLL(uint8_t divider)
     }
 }
 
-void LSL_CLOCK_UpscalePLL(uint8_t multiplier)
+void LSL_CLOCK_UpscalePLL(uint8_t in_multiplier)
 {
     RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLN_Msk;			        // Clear PLL Multiplier register
-    RCC->PLLCFGR |= (multiplier << RCC_PLLCFGR_PLLN_Pos);	// Set PLL Multiplier factor
+    RCC->PLLCFGR |= (in_multiplier << RCC_PLLCFGR_PLLN_Pos);	// Set PLL Multiplier factor
 }
 
-void LSL_CLOCK_PostscalePLL(uint8_t divider)
+void LSL_CLOCK_PostscalePLL(uint8_t in_divider)
 {
     RCC->PLLCFGR &= ~RCC_PLLCFGR_PLLP_Msk;			        // Clear PLL P Pstsc Divider register
-    RCC->PLLCFGR |= (divider << RCC_PLLCFGR_PLLP_Pos);	    // Set PLL P Pstsc Divider factor
+    RCC->PLLCFGR |= (in_divider << RCC_PLLCFGR_PLLP_Pos);	    // Set PLL P Pstsc Divider factor
 }
 
 /* Select Clock */
-void LSL_CLOCK_Select(uint8_t clock)
+void LSL_CLOCK_Select(uint8_t in_clock)
 {
     // Set clock as source clock (RCC_CFGR_SW)
 	RCC->CFGR &= ~RCC_CFGR_SW_Msk;
-	RCC->CFGR |= (clock << RCC_CFGR_SW_Pos);
+	RCC->CFGR |= (in_clock << RCC_CFGR_SW_Pos);
 	
 	// Wait for clock enabling (RCC_CFGR_SWS)
-	while (!(RCC->CFGR & (clock << 2)));
+	while (!(RCC->CFGR & (in_clock << 2)));
 }
 
 /* Prescaling */
-void LSL_CLOCK_PrescaleAPB(uint8_t apb_clk, uint8_t prescale)
+void LSL_CLOCK_PrescaleAPB(uint8_t in_apb_clk, uint8_t in_prescale)
 {
-    RCC->CFGR &= ~(0b111 << apb_clk);	// Clear RCC_CFGR_PPREx (1 for APB1, 2 for APB2)
-    RCC->CFGR |= (prescale << apb_clk);	// Set prescaler for APBx clock (RCC_CFGR_PPREx)
+    RCC->CFGR &= ~(0b111 << in_apb_clk);	// Clear RCC_CFGR_PPREx (1 for APB1, 2 for APB2)
+    RCC->CFGR |= (in_prescale << in_apb_clk);	// Set prescaler for APBx clock (RCC_CFGR_PPREx)
 }
