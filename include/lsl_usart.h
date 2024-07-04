@@ -1,6 +1,7 @@
 #ifndef LSL_USART_H
 #define LSL_USART_H
 
+#include "lsl_clock.h"
 #include "lsl_pinouts.h"
 
 typedef enum { Tx, Rx, Tx_Rx } LSL_USART_Direction_t;
@@ -12,7 +13,6 @@ typedef struct {
     uint8_t parity;
     uint8_t stop;
     LSL_USART_Direction_t direction;
-    LSL_Pinout_t *usart_pinout[2];
     IRQn_Type event;
 
 } LSL_USART_Handler_t;

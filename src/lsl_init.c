@@ -10,8 +10,8 @@ void LSL_Init_Registers(void)
 void LSL_Init_RCC(void)
 {
 	/* RCC Setup */
-	// LSL_CLOCK_EnableHSI();		// Enable High Speed Internal clock
-	// LSL_CLOCK_InitPLL(PLL_x9);	// PLL Multiplier x9
+	LSL_CLOCK_EnableHSI();									// Enable High Speed Internal clock
+	LSL_CLOCK_InitPLL(PLL_M_DIV2, PLL_N_x54, PLL_P_DIV2);	// PLL = 216MHz
 }
 
 void LSL_Init_GPIO(void)
@@ -36,17 +36,17 @@ void LSL_Init_ADC(void)
 
 void LSL_Init_USART(void)
 {
-	// /* USART Handler */
-	// LSL_INIT_USART2.usart 		= USART2;
-	// LSL_INIT_USART2.bauds 		= 9600;
-	// LSL_INIT_USART2.dataSize 	= 8;
-	// LSL_INIT_USART2.parity 		= 0;
-	// LSL_INIT_USART2.stop 		= 1;
-	// LSL_INIT_USART2.direction 	= Tx_Rx;
-	// LSL_INIT_USART2.event 		= USART2_IRQn;
+	/* USART Handler */
+	LSL_INIT_USART.usart 		= USART3;
+	LSL_INIT_USART.bauds 		= 9600;
+	LSL_INIT_USART.dataSize 	= 8;
+	LSL_INIT_USART.parity 		= 0;
+	LSL_INIT_USART.stop 		= 1;
+	LSL_INIT_USART.direction 	= Tx_Rx;
+	LSL_INIT_USART.event 		= USART3_IRQn;
 
-	// /* USART Init */
-	// LSL_USART_Init(&LSL_INIT_USART2);
+	/* USART Init */
+	LSL_USART_Init(&LSL_INIT_USART);
 }
 
 void LSL_Init_TIMERS(void)

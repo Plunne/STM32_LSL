@@ -120,13 +120,16 @@ void LSL_USART_Baudrate(USART_TypeDef* USART, uint32_t baudrate, uint8_t over)
 		0x0010, // 13 500 000 Bauds
 	};
 
+
 	switch (over)
 	{
 		case 8:
+			USART->CR1 |= USART_CR1_OVER8_Msk;
 			LSL_USART_SetBaudrate(USART, LSL_USART216_OVER8_BAUD, baudrate);
 			break;
 		
 		case 16:
+			USART->CR1 &= ~USART_CR1_OVER8_Msk;
 			LSL_USART_SetBaudrate(USART, LSL_USART216_OVER16_BAUD, baudrate);
 			break;
 		
@@ -229,6 +232,7 @@ void LSL_USART_Stop(USART_TypeDef* USART, uint8_t stop)
 /* Transmit */
 void LSL_USART_Tx(LSL_USART_Handler_t* USART_Handler, uint8_t data)
 {
+    // while (!(USART_Handler->usart->ISR & USART_ISR_TXE)) {}
 	USART_Handler->usart->TDR = (uint8_t) (data & 0xFF);
     while (!(USART_Handler->usart->ISR & USART_ISR_TC)) {}
 }

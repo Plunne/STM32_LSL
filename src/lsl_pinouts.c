@@ -61,45 +61,45 @@ void LSL_PINOUTS_ClearMode(GPIO_TypeDef *PORTx, uint8_t pin)
 
 void LSL_PINOUTS_SetMode(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode)
 {
-    PORTx->MODER |= (mode << (pin * 2)); // Set Mode for pins 0 -> 15
+    PORTx->MODER |= ((0b11 & mode) << (pin * 2)); // Set Mode for pins 0 -> 15
 }
 
 /* Input/Output Configuration */
 void LSL_PINOUTS_SetPullUpDown(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t pupd)
 {
     PORTx->PUPDR &= ~(0b11 << (pin * 2));
-    PORTx->PUPDR |= (pupd << (pin * 2));
+    PORTx->PUPDR |= ((0b11 & pupd) << (pin * 2));
 }
 
 void LSL_PINOUTS_SetOutputType(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t otype)
 {
     PORTx->OTYPER &= ~(1 << pin);
-    PORTx->OTYPER |= (otype << pin);
+    PORTx->OTYPER |= ((1 & otype) << pin);
 }
 
 void LSL_PINOUTS_SetOutputSpeed(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t ospeed)
 {
     PORTx->OSPEEDR &= ~(0b11 << (pin * 2));
-    PORTx->OSPEEDR |= (ospeed << (pin * 2));
+    PORTx->OSPEEDR |= ((0b11 & ospeed) << (pin * 2));
 }
 
 /* Pinout */
-void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode)
+void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode, uint8_t pupd)
 {
-    LSL_PINOUTS_Enable(PORTx);                      // Enable GPIO RCC
-    LSL_PINOUTS_ClearMode(PORTx, pin);              // Reset GPIO Mode
-    LSL_PINOUTS_SetMode(PORTx, pin, mode);          // Set GPIO Mode
+    LSL_PINOUTS_Enable(PORTx);                  // Enable GPIO RCC
+    LSL_PINOUTS_ClearMode(PORTx, pin);          // Reset GPIO Mode
+    LSL_PINOUTS_SetMode(PORTx, pin, mode);      // Set GPIO Mode
+    LSL_PINOUTS_SetPullUpDown(PORTx, pin, pupd);     // Set GPIO Pull Resistor
 }
 
 void LSL_PINOUTS_InitPinout(LSL_Pinout_t *pinout)
 {
-    LSL_PINOUTS_SetPinout(pinout->PORTx, pinout->pin, pinout->mode);
+    LSL_PINOUTS_SetPinout(pinout->PORTx, pinout->pin, pinout->mode, pinout->pupd);
 }
 
 /* Advanced */
-void LSL_PINOUTS_Advanced(LSL_Pinout_t *pinout, uint8_t pupd, uint8_t otype, uint8_t ospeed)
+void LSL_PINOUTS_Advanced(LSL_Pinout_t *pinout)
 {
-    LSL_PINOUTS_SetPullUpDown(pinout->PORTx, pinout->pin, pinout->pupd);    // Set GPIO Pull Resistor
     LSL_PINOUTS_SetOutputType(pinout->PORTx, pinout->pin, pinout->otype);   // Set GPIO Output Type (output & AF only)
     LSL_PINOUTS_SetOutputSpeed(pinout->PORTx, pinout->pin, pinout->ospeed); // Set GPIO Output Speed (output & AF only)
 }

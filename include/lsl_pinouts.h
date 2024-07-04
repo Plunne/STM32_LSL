@@ -43,10 +43,10 @@ void LSL_PINOUTS_SetOutputType(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t otype);
 void LSL_PINOUTS_SetOutputSpeed(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t ospeed);
 
 /* Pinout */
-void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode);
+void LSL_PINOUTS_SetPinout(GPIO_TypeDef *PORTx, uint8_t pin, uint8_t mode, uint8_t pupd);
 void LSL_PINOUTS_InitPinout(LSL_Pinout_t *pinout);
 
 /* Advanced */
-void LSL_PINOUTS_Advanced(LSL_Pinout_t *pinout, uint8_t pupd, uint8_t otype, uint8_t ospeed);
+void LSL_PINOUTS_Advanced(LSL_Pinout_t *pinout);
 
 #endif // LSL_PINOUTS_H

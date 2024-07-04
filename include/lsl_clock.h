@@ -4,13 +4,16 @@
 #include "lsl_board.h"
 
 /* Define PLL settings */
-#define PLL_x4      0b0010
-#define PLL_x5      0b0011
-#define PLL_x6      0b0100
-#define PLL_x7      0b0101
-#define PLL_x8      0b0110
-#define PLL_x9      0b0111
-#define PLL_x16     0b1111
+#define PLL_M_DIV_MIN   2
+#define PLL_M_DIV_MAX   63
+#define PLL_M_DIV2      2
+
+#define PLL_N_x54       54      // 432 MHz after PLL M Prsc Div = 2 (For 216 MHz after Pstsc Div = 2)
+
+#define PLL_P_DIV2      0b00
+#define PLL_P_DIV4      0b01
+#define PLL_P_DIV6      0b10
+#define PLL_P_DIV8      0b11
 
 /* Define APB settings */
 #define APB1_CLK    8
@@ -27,8 +30,10 @@ void LSL_CLOCK_EnableHSI(void);
 void LSL_CLOCK_EnablePLL(void);
 
 /* PLL */
-void LSL_CLOCK_InitPLL(uint8_t multiplier);
-void LSL_CLOCK_MultiplierPLL(uint8_t multiplier);
+void LSL_CLOCK_InitPLL(uint8_t dividerM, uint8_t multiplierN, uint8_t dividerP);
+void LSL_CLOCK_PrescalePLL(uint8_t divider);
+void LSL_CLOCK_UpscalePLL(uint8_t multiplier);
+void LSL_CLOCK_PostscalePLL(uint8_t divider);
 
 /* Selection */
 void LSL_CLOCK_Select(uint8_t clock);
