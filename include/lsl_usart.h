@@ -37,7 +37,7 @@ void LSL_USART_Parity(USART_TypeDef* USART, uint8_t parity);
 void LSL_USART_Stop(USART_TypeDef* USART, uint8_t stop);
 
 /* Transmit */
-void LSL_USART_Tx(LSL_USART_Handler_t* USART_Handler, uint8_t data);
+void LSL_USART_Tx(LSL_USART_Handler_t* USART_Handler, const uint8_t* data);
 
 /* Receive */
 uint8_t LSL_USART_Rx(LSL_USART_Handler_t* USART_Handler);

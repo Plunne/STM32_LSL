@@ -14,7 +14,7 @@ void LSL_USART_Init(LSL_USART_Handler_t* USART_Handler)
 	}
 	else if (USART_Handler->usart == USART3)
 	{
-		RCC->APB1ENR |= RCC_APB1ENR_USART3EN;	// Enable clock USART3
+		// RCC->APB1ENR |= RCC_APB1ENR_USART3EN;	// Enable clock USART3
 	}
 	else if (USART_Handler->usart == UART4)
 	{
@@ -42,7 +42,7 @@ void LSL_USART_Init(LSL_USART_Handler_t* USART_Handler)
 	}
 
 	/* Setup USART */
-	LSL_USART_Baudrate(USART_Handler->usart, USART_Handler->bauds, 8);
+	LSL_USART_Baudrate(USART_Handler->usart, USART_Handler->bauds, 16);
 	LSL_USART_DataSize(USART_Handler->usart, USART_Handler->dataSize);
 	LSL_USART_Parity(USART_Handler->usart, USART_Handler->parity);
 	LSL_USART_Stop(USART_Handler->usart, USART_Handler->stop);
@@ -230,10 +230,11 @@ void LSL_USART_Stop(USART_TypeDef* USART, uint8_t stop)
 }
 
 /* Transmit */
-void LSL_USART_Tx(LSL_USART_Handler_t* USART_Handler, uint8_t data)
+void LSL_USART_Tx(LSL_USART_Handler_t* USART_Handler, const uint8_t* data)
 {
+	const uint8_t *character = data;
     while (!(USART_Handler->usart->ISR & USART_ISR_TXE)) {}
-	USART_Handler->usart->TDR = (uint8_t) (data & 0xFF);
+	USART_Handler->usart->TDR = (uint8_t) (*character & 0xFF);
     while (!(USART_Handler->usart->ISR & USART_ISR_TC)) {}
 }
 

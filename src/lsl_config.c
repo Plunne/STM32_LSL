@@ -8,18 +8,18 @@ void LSL_CONFIG_Init(void)
      ***************/
 
     // POTAR
-    LSL_CONFIG_Pinout(&POTAR, GPIOA, 5, ADC_MODE, NO_PULL);
-    LSL_CONFIG_Pinout(&POTAR2, GPIOA, 6, ADC_MODE, NO_PULL);
+    // LSL_CONFIG_Pinout(&POTAR, GPIOA, 5, ADC_MODE, NO_PULL);
+    // LSL_CONFIG_Pinout(&POTAR2, GPIOA, 6, ADC_MODE, NO_PULL);
 
     /*******************
      *     DIGITAL     *
      *******************/
 
     // LED
-    LSL_CONFIG_Pinout(&LED, GPIOB, 7, OUTPUT_MODE, NO_PULL);
+    // LSL_CONFIG_Pinout(&LED, GPIOB, 7, OUTPUT_MODE, NO_PULL);
 
     // Button
-    LSL_CONFIG_Pinout(&Button, GPIOC, 13, INPUT_MODE, NO_PULL);
+    // LSL_CONFIG_Pinout(&Button, GPIOC, 13, INPUT_MODE, NO_PULL);
 
     /*****************
      *     USART     *

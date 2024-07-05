@@ -11,7 +11,7 @@ void LSL_Init_RCC(void);
 void LSL_Init_GPIO(void);
 void LSL_Init_ADC(void);
 void LSL_Init_USART(void);
-void LSL_Init_TIMERS(void);
+// void LSL_Init_TIMERS(void);
 
 /* Analog Handler */
 LSL_ADC_Handler_t LSL_INIT_ADC1;
@@ -19,6 +19,6 @@ LSL_ADC_Handler_t LSL_INIT_ADC1;
 LSL_USART_Handler_t LSL_INIT_USART;
 
 /* Timer Handler */
-// LSL_TIMER_Handler LSL_INIT_TIMER2;
+// LSL_TIMER_Handler_t LSL_INIT_TIMER2;
 
 #endif // LSL_INIT_H

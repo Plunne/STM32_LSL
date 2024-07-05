@@ -9,6 +9,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "PlatformIO Debugger",
+            "request": "launch",
+            "type": "platformio-debug",
+            "executable": ".pio/build/nucleo_f767zi/firmware.elf",
+            "toolchainBinDir": "/usr/bin"
+        },
+        {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",

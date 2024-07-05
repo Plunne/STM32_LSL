@@ -7,7 +7,7 @@
 
 /* Interrupts */
 // void TIM2_IRQHandler(void);
-void USART3_IRQHandler(void);
+// void USART3_IRQHandler(void);
 
 /* Main */
 int main(void)
@@ -22,7 +22,12 @@ int main(void)
 	/* Super Loop */
 	while (1)
 	{
-		LSL_USART_Tx(&LSL_INIT_USART, 'A');
+		// LSL_DIGITAL_Write(&LED, HIGH);
+		// LSL_UTILS_DelayMs(LSL_ADC_Read(&LSL_INIT_ADC1, &POTAR));
+		// LSL_DIGITAL_Write(&LED, LOW);
+		// LSL_UTILS_DelayMs(LSL_ADC_Read(&LSL_INIT_ADC1, &POTAR2));
+
+		LSL_USART_Tx(&LSL_INIT_USART, "A");
 		LSL_UTILS_DelayMs(2000);
 	}
 	
@@ -45,14 +50,14 @@ int main(void)
 // 	}
 // }
 
-void USART3_IRQHandler(void) {
+// void USART3_IRQHandler(void) {
 
-	if (USART3->ISR & USART_ISR_RXNE) {
+// 	if (USART3->ISR & USART_ISR_RXNE) {
 
-		/* Interrupt instruction */
-		// counter = 10;
+// 		/* Interrupt instruction */
+// 		// counter = 10;
 
-		/* Reset IRQ flag */
-		USART3->ISR &= ~USART_ISR_RXNE;
-	}
-}
+// 		/* Reset IRQ flag */
+// 		USART3->ISR &= ~USART_ISR_RXNE;
+// 	}
+// }
